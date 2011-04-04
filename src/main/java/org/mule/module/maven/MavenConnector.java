@@ -41,13 +41,19 @@ public class MavenConnector
      *
      * @param goal Name of the goal to execute (eg javadoc:javadoc)
      * @param properties Environment properties
+     * @param overrideDirectory Name of the directory containing your pom.xml
      */
     @Operation
-    public void executeGoal(String goal, @Parameter(optional=true) Map<String, String> properties)
+    public void executeGoal(String goal, @Parameter(optional=true) Map<String, String> properties, @Parameter(optional=true) String overrideDirectory)
     {
         try
         {
-            Verifier verifier = new Verifier(directory);
+            Verifier verifier;
+            if( overrideDirectory != null )
+                verifier = new Verifier(overrideDirectory);
+            else
+                verifier = new Verifier(directory);
+
             verifier.executeGoal(goal, properties);
             verifier.verifyErrorFreeLog();
         }
