@@ -19,6 +19,7 @@ import org.mule.tools.cloudconnect.annotations.Parameter;
 import org.mule.tools.cloudconnect.annotations.Property;
 
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.maven.it.Verifier;
 
@@ -54,7 +55,13 @@ public class MavenConnector
             else
                 verifier = new Verifier(directory);
 
-            verifier.executeGoal(goal, properties);
+            Properties sysProp = (Properties)System.getProperties().clone();
+            for( String key : properties.keySet() )
+                sysProp.setProperty(key, properties.get(key) );
+
+            verifier.setSystemProperties(sysProp);
+            verifier.executeGoal(goal);
+
             verifier.verifyErrorFreeLog();
         }
         catch(Exception e)
