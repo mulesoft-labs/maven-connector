@@ -13,71 +13,61 @@
  */
 package org.mule.module.maven;
 
+import org.apache.maven.cli.MavenCli;
 import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
 import org.mule.tools.cloudconnect.annotations.Parameter;
 import org.mule.tools.cloudconnect.annotations.Property;
 
 import java.util.Map;
-import java.util.Properties;
 
-import org.apache.maven.it.Verifier;
-
-@Connector(namespacePrefix="maven")
-public class MavenConnector
-{
+@Connector(namespacePrefix = "maven")
+public class MavenConnector {
     @Property
     private String directory;
 
     /**
      * Executes a Maven goal
-     *
+     * <p/>
      * {@code
      * <maven:execute-goal goal="install">
-     *     <maven:properties>
-     *         <maven:property key="maven.test.skip" value="true"/>
-     *     </maven:properties>
+     * <maven:properties>
+     * <maven:property key="maven.test.skip" value="true"/>
+     * </maven:properties>
      * </maven:execute-goal>
      * }
      *
-     * @param goal Name of the goal to execute (eg javadoc:javadoc)
-     * @param properties Environment properties
+     * @param goal              Name of the goal to execute (eg javadoc:javadoc)
+     * @param properties        Environment properties
      * @param overrideDirectory Name of the directory containing your pom.xml
      */
     @Operation
-    public void executeGoal(String goal, @Parameter(optional=true) Map<String, String> properties, @Parameter(optional=true) String overrideDirectory)
-    {
-        try
-        {
-            Verifier verifier;
-            if( overrideDirectory != null )
-                verifier = new Verifier(overrideDirectory);
-            else
-                verifier = new Verifier(directory);
+    public void executeGoal(String goal, @Parameter(optional = true) Map<String, String> properties, @Parameter(optional = true) String overrideDirectory) {
+        try {
+            MavenCli cli = new MavenCli();
+            String[] arguments = new String[properties.size() + 1];
 
-            Properties sysProp = (Properties)System.getProperties().clone();
-            for( String key : properties.keySet() )
-                sysProp.setProperty(key, properties.get(key) );
+            int i = 0;
+            for (String key : properties.keySet()) {
+                arguments[i] = "-D" + key + "=" + properties.get(key);
+                i++;
+            }
 
-            verifier.setSystemProperties(sysProp);
-            verifier.executeGoal(goal);
+            arguments[i] = goal;
 
-            verifier.verifyErrorFreeLog();
-        }
-        catch(Exception e)
-        {
+
+            cli.doMain(arguments, overrideDirectory, System.out, System.err);
+        } catch (Exception e) {
             throw new RuntimeException("Unable to execute goal " + goal, e);
         }
 
     }
 
-    public String getDirectory()
-    {
+    public String getDirectory() {
         return directory;
     }
 
-    public void setDirectory(String directory)
-    {
+    public void setDirectory(String directory) {
         this.directory = directory;
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.modules</groupId>
     <artifactId>mule-module-maven</artifactId>
@@ -96,7 +97,8 @@
                         <exclude>.gitignore</exclude>
                         <exclude>**/*.txt</exclude>
                         <exclude>**/*.ftl</exclude>
-                        <exclude>**/build-number.txt</exclude> <!-- bamboo -->
+                        <exclude>**/build-number.txt</exclude>
+                        <!-- bamboo -->
                     </excludes>
                 </configuration>
                 <executions>
@@ -209,9 +211,9 @@
             <version>2.0.12</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-verifier</artifactId>
-            <version>1.2</version>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-embedder</artifactId>
+            <version>3.0.3</version>
         </dependency>
     </dependencies>
 
