@@ -14,6 +14,7 @@
 package org.mule.module.maven;
 
 import org.apache.maven.cli.MavenCli;
+import org.codehaus.plexus.classworlds.ClassWorld;
 import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
 import org.mule.tools.cloudconnect.annotations.Parameter;
@@ -25,6 +26,14 @@ import java.util.Map;
 public class MavenConnector {
     @Property
     private String directory;
+
+    private ClassWorld classWorld;
+    private MavenCli mavenCli;
+
+    public MavenConnector() {
+        this.classWorld = new ClassWorld("plexus.core", Thread.currentThread().getContextClassLoader());
+        this.mavenCli = new MavenCli(classWorld);
+    }
 
     /**
      * Executes a Maven goal
@@ -44,7 +53,6 @@ public class MavenConnector {
     @Operation
     public void executeGoal(String goal, @Parameter(optional = true) Map<String, String> properties, @Parameter(optional = true) String overrideDirectory) {
         try {
-            MavenCli cli = new MavenCli();
             String[] arguments = new String[properties.size() + 1];
 
             int i = 0;
@@ -56,7 +64,7 @@ public class MavenConnector {
             arguments[i] = goal;
 
 
-            cli.doMain(arguments, overrideDirectory, System.out, System.err);
+            mavenCli.doMain(arguments, overrideDirectory, System.out, System.err);
         } catch (Exception e) {
             throw new RuntimeException("Unable to execute goal " + goal, e);
         }
