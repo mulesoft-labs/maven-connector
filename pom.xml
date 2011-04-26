@@ -5,7 +5,7 @@
     <artifactId>mule-module-maven</artifactId>
     <packaging>cloud-connector</packaging>
     <name>Mule Maven Connector</name>
-    <version>1.5</version>
+    <version>1.6-SNAPSHOT</version>
     <description>Maven is a tool used for building and managing any Java-based project. This connector will let you
         execute Maven goals.
     </description>
