@@ -26,20 +26,20 @@ Add the connector's maven repo to your pom.xml:
     <repositories>
         <repository>
             <id>muleforge-releases</id>
-            <name>MuleForge Snapshot Repository</name>
-            <url>https://repository.muleforge.org/release/</url>
+            <name>MuleForge Releases Repository</name>
+            <url>https://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
         </repsitory>
     </repositories>
 
 Add the connector as a dependency to your project. This can be done by adding
-the following under the <dependencies> element in the pom.xml file of the
+the following under the dependencies element in the pom.xml file of the
 application:
 
     <dependency>
         <groupId>org.mule.modules</groupId>
         <artifactId>mule-module-maven</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.6-SNAPSHOT</version>
     </dependency>
 
 Configuration
@@ -57,26 +57,28 @@ Here is detailed list of all the configuration attributes:
 |directory||no|
 
 
+
 Execute Goal
 ------------
 
 Executes a Maven goal
-
+<p/>
 
 
     
     <maven:execute-goal goal="install">
-        <maven:properties>
-            <maven:property key="maven.test.skip" value="true"/>
-        </maven:properties>
+    <maven:properties>
+    <maven:property key="maven.test.skip" value="true"/>
+    </maven:properties>
     </maven:execute-goal>
     
 
 | attribute | description | optional | default value | possible values |
 |:-----------|:-----------|:---------|:--------------|:----------------|
 |config-ref|Specify which configuration to use for this invocation|yes||
-|goal| Name of the goal to execute (eg javadoc:javadoc)|no||
-|properties| Environment properties|yes||
+|goal|              Name of the goal to execute (eg javadoc:javadoc)|no||
+|properties|        Environment properties|yes||
+|overrideDirectory| Name of the directory containing your pom.xml|yes||
 
 
 
