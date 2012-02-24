@@ -1,0 +1,5 @@
+org.mule.module.maven
+org.mule.module.maven.adapters
+org.mule.module.maven.config
+org.mule.module.maven.processors
+
