@@ -14,7 +14,10 @@
     <packaging>mule-module</packaging>
     <name>Mule Maven Connector</name>
 
-    <build>
+<properties>
+<mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
+</properties>    
+<build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
