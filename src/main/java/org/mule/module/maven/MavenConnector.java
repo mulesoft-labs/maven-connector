@@ -50,13 +50,22 @@ public class MavenConnector {
     @Processor
     public void executeGoal(String goal, @Optional Map<String, String> properties, @Optional String directory) {
         try {
-            String[] arguments = new String[properties.size() + 1];
-
+            String[] arguments = null;
             int i = 0;
-            for (String key : properties.keySet()) {
-                arguments[i] = "-D" + key + "=" + properties.get(key);
-                i++;
+            if ( properties != null )
+            {
+                String[] arguments = new String[properties.size() + 1];
+
+                for (String key : properties.keySet()) {
+                    arguments[i] = "-D" + key + "=" + properties.get(key);
+                    i++;
+                 } 
             }
+            else
+            {
+                String[] arguments = new String[1];
+            }
+
 
             arguments[i] = goal;
 
