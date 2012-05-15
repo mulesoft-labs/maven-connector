@@ -54,7 +54,7 @@ public class MavenConnector {
             int i = 0;
             if ( properties != null )
             {
-                String[] arguments = new String[properties.size() + 1];
+                arguments = new String[properties.size() + 1];
 
                 for (String key : properties.keySet()) {
                     arguments[i] = "-D" + key + "=" + properties.get(key);
@@ -63,7 +63,7 @@ public class MavenConnector {
             }
             else
             {
-                String[] arguments = new String[1];
+                arguments = new String[1];
             }
 
 
