@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3-SNAPSHOT</version>
+        <version>3.3.0-EA</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -15,7 +15,7 @@
     <name>Mule Maven Connector</name>
 
 <properties>
-<mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
+<mule.devkit.version>3.3.0-EA</mule.devkit.version>
 </properties>    
 <build>
         <plugins>
@@ -92,6 +92,14 @@
         </repository>
     </repositories>
 
+<distributionManagement>
+        <repository>
+            <id>nexus-test</id>
+            <name>MuleSoft Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/connectors/</url>
+        </repository>
+    </distributionManagement>
+    
     <scm>
         <connection>scm:git:git://github.com:mulesoft/maven-connector.git
         </connection>
