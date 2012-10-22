@@ -1,7 +1,5 @@
 <!-- BEGIN_INCLUDE(maven:execute-goal) -->
 <maven:execute-goal goal="install">
-    <maven:properties>
-        <maven:property key="maven.test.skip" value="true"/>
-    </maven:properties>
+    <maven:properties ref="#[payload]" />
 </maven:execute-goal>
 <!-- END_INCLUDE(maven:execute-goal) -->

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3.0-EA</version>
+        <version>3.3.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -15,52 +15,8 @@
     <name>Mule Maven Connector</name>
 
 <properties>
-<mule.devkit.version>3.3.0-EA</mule.devkit.version>
+<mule.devkit.version>3.3.1</mule.devkit.version>
 </properties>    
-<build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludePackageNames>org.mule.tooling.ui.contribution:*</excludePackageNames>
-                    <docletArtifact>
-                        <groupId>org.mule.tools.devkit</groupId>
-                        <artifactId>mule-devkit-doclet</artifactId>
-                        <version>${mule.devkit.version}</version>
-                    </docletArtifact>
-                    <doclet>org.mule.devkit.doclet.Doclava</doclet>
-                    <bootclasspath>${sun.boot.class.path}</bootclasspath>
-                    <additionalparam><!--
-                        -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
-                        -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml -->
-                        -hdf project.artifactId "${project.artifactId}"
-                        -hdf project.groupId "${project.groupId}"
-                        -hdf project.version "${project.version}"
-                        -hdf project.name "${project.name}"
-                        -hdf project.repo.name "${project.distributionManagement.repository.name}"
-                        -hdf project.repo.id "${project.distributionManagement.repository.id}"
-                        -hdf project.repo.url "${project.distributionManagement.repository.url}"
-                        -hdf project.snapshotRepo.name "${project.distributionManagement.snapshotRepository.name}"
-                        -hdf project.snapshotRepo.id "${project.distributionManagement.snapshotRepository.id}"
-                        -hdf project.snapshotRepo.url "${project.distributionManagement.snapshotRepository.url}"
-                        -d ${project.build.directory}/apidocs
-                    </additionalparam>
-                    <useStandardDocletOptions>false</useStandardDocletOptions>
-                    <additionalJOption>-J-Xmx1024m</additionalJOption>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencies>
 		<dependency>
